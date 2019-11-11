@@ -1,6 +1,6 @@
 /*
  *
- *  Copyright (C) 2017 Aaron Powers
+1 *  Copyright (C) 2017 Aaron Powers
  *
  *   Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import static java.lang.Math.min;
 
 import booker.building_data.BookerObject;
 import booker.building_data.NamespaceList;
+import willie.core.Interpolator;
 import willie.core.RequiresWeather;
 import willie.core.Weather;
 import willie.core.WillieObject;
@@ -59,7 +60,9 @@ public class DrybulbResetSetpoint implements WillieObject, Setpoint, RequiresWea
 
 	@Override
 	public double getSetpoint() {
-		return max(minDrybulbSetpoint,min(maxDrybulbSetpoint,(maxDrybulbSetpoint - minDrybulbSetpoint)/
-				(maxDrybulb - minDrybulb)*(weather.drybulb()-minDrybulb)+ minDrybulbSetpoint));
+		return Interpolator.interpolate(weather.drybulb(), minDrybulb, maxDrybulb, 
+				minDrybulbSetpoint, maxDrybulbSetpoint, Math.min(minDrybulbSetpoint,maxDrybulbSetpoint), Math.max(minDrybulbSetpoint,maxDrybulbSetpoint));
+		//return max(minDrybulbSetpoint,min(maxDrybulbSetpoint,(maxDrybulbSetpoint - minDrybulbSetpoint)/
+		//		(maxDrybulb - minDrybulb)*(weather.drybulb()-minDrybulb)+ minDrybulbSetpoint));
 	}
 }

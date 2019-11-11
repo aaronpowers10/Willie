@@ -82,7 +82,7 @@ public class TimeManager implements WillieObject, ReportWriter {
 		return timeStep;
 	}
 
-	public double dt(){
+	public double dtHours(){
 		/*
 		 * Units of hours
 		 */

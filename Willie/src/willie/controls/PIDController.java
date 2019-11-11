@@ -134,7 +134,7 @@ public class PIDController
 	public void addData(Report report) {
 		report.putReal(error());
 		report.putReal(previousError);
-		report.putReal(timeManager.dt());
+		report.putReal(timeManager.dtHours());
 		report.putReal(integralError());
 		report.putReal(derivativeError());
 		report.putReal(pOutput());

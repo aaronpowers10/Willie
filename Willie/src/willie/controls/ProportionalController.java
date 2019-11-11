@@ -70,8 +70,8 @@ public class ProportionalController implements WillieObject,Controller, ReportWr
 
 	@Override
 	public double output() {
-		if(outputSignal() <= 0)
-			return 0;
+		//if(outputSignal() <= 0)
+		//	return 0;
 		return min(max(outputSignal(),minOutput),maxOutput);
 	}
 	

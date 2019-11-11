@@ -45,23 +45,20 @@ public class Project implements ProjectReadCompleteListener {
 	private MasterObjectFactory masterObjectFactory;
 	private ArrayList<SimulationUpdateListener> simulationUpdateListeners;
 
-	public Project(String fileName, ArrayList<ObjectFactory> objectFactories) {
+	public Project(ArrayList<ObjectFactory> objectFactories) {
 		initialize();
 		for (ObjectFactory factory : objectFactories) {
 			masterObjectFactory.addFactory(factory);
 		}
-		read(fileName);
 	}
 
-	public Project(String fileName, ObjectFactory objectFactory) {
+	public Project(ObjectFactory objectFactory) {
 		initialize();
 		masterObjectFactory.addFactory(objectFactory);
-		read(fileName);
 	}
 
-	public Project(String fileName) {
+	public Project() {
 		initialize();
-		read(fileName);
 	}
 
 	public void addSimulationUpdateListener(SimulationUpdateListener simulationUpdateListener) {
@@ -90,11 +87,16 @@ public class Project implements ProjectReadCompleteListener {
 
 	private void read(String fileName) {
 		ProjectReader reader = new ProjectReader();
+		reader.addProjectReadCompleteListener(this);
 		reader.addUpdateListener(new ConsoleUpdateListener());
-
+		reader.loadInThread(fileName);
+	}
+	
+	public void simulate(String fileName) {
+		read(fileName);
 	}
 
-	public void simulate() throws IOException {
+	public void runSimulation() throws IOException {
 		long startTime = System.nanoTime();
 
 		for (SimulationUpdateListener updateListener : simulationUpdateListeners) {
@@ -222,6 +224,12 @@ public class Project implements ProjectReadCompleteListener {
 			if (objects.get(i) instanceof Simulator) {
 				simulators.add((Simulator) objects.get(i));
 			}
+		}
+		
+		try {
+			runSimulation();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 
 	}

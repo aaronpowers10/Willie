@@ -41,11 +41,11 @@ public class SoftStartController implements WillieObject,Controller,Simulator,Re
 	
 	@Override
 	public double output() {
-		double changePerSecond = (controller.output() - previousOutput)/timeManager.dt()/3600.0;
+		double changePerSecond = (controller.output() - previousOutput)/timeManager.dtHours()/3600.0;
 		if(changePerSecond > maxChangePerSecond){
-			return previousOutput + maxChangePerSecond*timeManager.dt()*3600;
+			return previousOutput + maxChangePerSecond*timeManager.dtHours()*3600;
 		} else if (changePerSecond < -maxChangePerSecond){
-			return previousOutput - maxChangePerSecond*timeManager.dt()*3600;
+			return previousOutput - maxChangePerSecond*timeManager.dtHours()*3600;
 		} else {
 			return controller.output();
 		}

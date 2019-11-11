@@ -87,7 +87,7 @@ public class ElectricMeter implements WillieObject, ReportWriter, RequiresTimeMa
 
 	@Override
 	public void simulateStep2() {
-		consumption += power()*timeManager.dt();
+		consumption += power()*timeManager.dtHours();
 	}
 
 	@Override

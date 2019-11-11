@@ -45,5 +45,9 @@ public class Conversions {
 	public static double inchesWaterToPsi(double inchesWater){
 		return 0.0360912*inchesWater;
 	}
+	
+	public static double psiToInchesWater(double psi) {
+		return psi/0.0360912;
+	}
 
 }
