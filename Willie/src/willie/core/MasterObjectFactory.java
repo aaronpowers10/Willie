@@ -20,26 +20,26 @@ package willie.core;
 import java.util.ArrayList;
 
 public class MasterObjectFactory {
-	
+
 	private ArrayList<ObjectFactory> factories;
-	
-	public MasterObjectFactory(){
+
+	public MasterObjectFactory() {
 		factories = new ArrayList<ObjectFactory>();
 	}
-	
-	public void addFactory(ObjectFactory factory){
+
+	public void addFactory(ObjectFactory factory) {
 		factories.add(factory);
 	}
 
 	public WillieObject create(String type, String name) {
-		
-		for(ObjectFactory factory : factories){
+
+		for (ObjectFactory factory : factories) {
 			WillieObject object = factory.create(type, name);
-			if(object != null){
+			if (object != null) {
 				return object;
 			}
 		}
-		
+
 		if (type.equals("Biquadratic Curve")) {
 			return new BiquadraticCurve(name);
 		} else if (type.equals("Electric Meter")) {
@@ -60,6 +60,8 @@ public class MasterObjectFactory {
 			return new TimeManager();
 		} else if (name.equals("TMY3 Weather")) {
 			return new TMY3Weather();
+		} else if (name.equals("Weather From File")) {
+			return new WeatherFromFile();
 		} else {
 			throw new WillieFileReadException(name + " is not a valid Global type.");
 		}

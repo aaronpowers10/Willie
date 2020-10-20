@@ -38,6 +38,18 @@ public class Conversions {
 		return 32 + 9/5.0*celsius;
 	}
 	
+	public static double fahrenheitToCelsius(double fahrenheit) {
+		return (fahrenheit-32)*5/9.0;
+	}
+	
+	public static double celsiusToKelvin(double celsius) {
+		return celsius + 273.15;
+	}
+	
+	public static double fahrenheitToKelvin(double fahrenheit) {
+		return celsiusToKelvin(fahrenheitToCelsius(fahrenheit) );
+	}
+	
 	public static double millibarToPsi(double millibar){
 		return 0.0145038*millibar;
 	}

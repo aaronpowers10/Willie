@@ -196,4 +196,8 @@ public class TimeManager implements WillieObject, ReportWriter {
 		report.putInteger(minute());
 		report.putInteger(second());
 	}
+	
+	public boolean isCalendarAfter(Calendar calendar) {
+		return calendar.after(this.calendar);
+	}
 }

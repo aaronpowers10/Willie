@@ -136,6 +136,10 @@ public class Psychrometrics {
 		    return 90.12 + 26.142 * alpha + 0.8927 * alpha*alpha;
 		}
 	}
+	
+	public static double dewpointFWetbulb(double drybulb, double wetbulb,double pressure) {
+		return dewpointFHumidityRatio(drybulb,humidityRatioFWetbulb(drybulb,wetbulb,pressure),pressure);
+	}
 	public static void main(String[] args){
 		System.out.println(saturationHumidityRatioFEnthalpy(50,14.7));
 	}

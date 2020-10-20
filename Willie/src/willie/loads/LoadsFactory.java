@@ -28,7 +28,9 @@ public class LoadsFactory implements ObjectFactory{
 			return new CompositeLoad(name);
 		} else if (type.equals("Drybulb Based Load")) {
 			return new DrybulbBasedLoad(name);
-		} else if (type.equals("Load From File")) {
+		} else if (type.equals("Hourly Load From File")) {
+			return new HourlyLoadFromFile(name);
+		}else if (type.equals("Load From File")) {
 			return new LoadFromFile(name);
 		} else if (type.equals("Scheduled Load")) {
 			return new ScheduledLoad(name);
